@@ -128,14 +128,16 @@ while(cap.isOpened()):
 
     if(abs(time3 - time0).total_seconds() > 60*minuteNum):
         winkChazhi = countWink-countWink2
-        print((countWink))
-        print(countWink2)
+        # print((countWink))
+        # print(countWink2)
         if(winkChazhi>highWinkRate*minuteNum):
             print("检测到上" + str(minuteNum) + " 分钟您的眨眼频率过高。您的眨眼次数为 "
-                  + str(winkChazhi/minuteNum) + " 次每分钟。正常眨眼次数为每分钟之内 " + str(highWinkRate) + " 次。")
+                  + str(winkChazhi/minuteNum) + " 次每分钟。正常眨眼次数为每分钟之内 " + str(highWinkRate) +
+                  " 次。这代表您可能需要休息一下眼睛~")
         elif (winkChazhi <lowWinkRate*minuteNum):
             print("检测到上" + str(minuteNum) + " 分钟您的眨眼频率过低。您的眨眼次数为 "
-                  + str(winkChazhi / minuteNum) + " 次每分钟。正常眨眼次数为每分钟 " + str(lowWinkRate) + " 次以上。")
+                  + str(winkChazhi / minuteNum) + " 次每分钟。正常眨眼次数为每分钟 " + str(lowWinkRate) +
+                  " 次以上。您可能聚精会神地看太久啦~请眨眨眼湿润一下眼球叭。保护好眼睛哦~")
         else:
             print("检测到上" + str(minuteNum) + " 分钟您的眨眼频率属于正常范畴。您的眨眼次数为 "
                   + str(winkChazhi/minuteNum)+ " 次每分钟。")
@@ -146,14 +148,19 @@ while(cap.isOpened()):
     if(countWink>300):
         break
 print(11111111111111111)
+plt.rcParams['font.sans-serif']=['SimHei'] #用来正常显示中文标签
 plt.subplot(211)
 X = np.arange(0,len(ifWink0))
-Y = np.arange(0,len(countWinkList))
+Y = np.arange(1,len(countWinkList)+1)
 print(X.shape)
 print(ifWink0)
 plt.plot(X, ifWink0)
 plt.plot(X, ifWink1)
+plt.xlabel('眨眼次数', fontsize=16)
+plt.ylabel('眼部纵横比', fontsize=16)
 plt.subplot(212)
 plt.plot(Y, countWinkList)
+plt.xlabel('分钟', fontsize=16)
+plt.ylabel('眨眼次数', fontsize=16)
 plt.savefig("fig1.jpg")
 plt.show()
