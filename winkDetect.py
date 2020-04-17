@@ -49,7 +49,6 @@ while(cap.isOpened()):
     cv2.imshow("capture", img)
     k = cv2.waitKey(1)
     img_gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
-
     # 人脸数rects
     rects = detector(img_gray, 0)
     totalpos = []
@@ -57,17 +56,8 @@ while(cap.isOpened()):
     for i in range(len(rects)):
         landmarks = np.matrix([[p.x, p.y] for p in predictor(img, rects[i]).parts()])
         for idx, point in enumerate(landmarks):
-            # 68点的坐标
             pos = (point[0, 0], point[0, 1])
-            # print(idx, pos)
             totalpos.append(pos)
-            # 利用cv2.circle给每个特征点画一个圈，共68个
-            cv2.circle(img, pos, 5, color=(0, 255, 0))
-            # cv2.circle(img3, pos, 5, color=(0, 255, 0))
-
-            # 利用cv2.putText输出1-68
-            font = cv2.FONT_HERSHEY_SIMPLEX
-            cv2.putText(img, str(idx + 1), pos, font, 0.8, (0, 0, 255), 1, cv2.LINE_AA)
     if(totalpos==[]):
         print("未检测到人脸！可能人脸被遮挡！等待2秒后摄像头会重新开始捕捉检测。")
         cv2.waitKey(2000)
@@ -145,15 +135,15 @@ while(cap.isOpened()):
         time0 = datetime.datetime.now()
         minuteBunchNum = minuteBunchNum + 1
         countWink2 = countWink
-    if(countWink>300):
+    if(countWink>100):
         break
-print(11111111111111111)
+# print(11111111111111111)
 plt.rcParams['font.sans-serif']=['SimHei'] #用来正常显示中文标签
 plt.subplot(211)
 X = np.arange(0,len(ifWink0))
 Y = np.arange(1,len(countWinkList)+1)
-print(X.shape)
-print(ifWink0)
+# print(X.shape)
+# print(ifWink0)
 plt.plot(X, ifWink0)
 plt.plot(X, ifWink1)
 plt.xlabel('眨眼次数', fontsize=16)
