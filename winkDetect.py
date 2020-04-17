@@ -135,7 +135,7 @@ while(cap.isOpened()):
         time0 = datetime.datetime.now()
         minuteBunchNum = minuteBunchNum + 1
         countWink2 = countWink
-    if(countWink>100):
+    if(countWink>300):
         break
 # print(11111111111111111)
 plt.rcParams['font.sans-serif']=['SimHei'] #用来正常显示中文标签
